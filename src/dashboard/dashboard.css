@@ -1,0 +1,30 @@
+.content-section{
+    display: flex;
+}
+
+.dashboard-container{
+    overflow-y: hidden;
+}
+
+.left-navigation-bar-container{
+    background-color: #4075FF;
+    width: 8%;
+    height: 100vh;
+}
+
+.left-navigation-bar-container div{
+    height: 5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.left-navigation-bar-container div p{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.left-navigation-bar-container div:hover{
+    background-color: #3A62C9;
+}

@@ -1,0 +1,99 @@
+.dashboard-logo-container{
+    height: 3rem;
+    margin-left: 2rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.dashboard-logo-container img{
+    height: 3rem;
+}
+
+.dashboard-navbar-container{
+    height: 5rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.dashboard-navigation-container{
+    display: flex;
+    height: 100%;
+}
+
+.dashboard-navigation-button-container{
+    height: 3rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: right;
+    margin-right: 4rem;
+    text-decoration: none;
+}
+
+
+.profile-image-container{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 2rem;
+    background-color: #9c9c9c;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 1.5rem;
+}
+
+
+
+.dashboard-navigation-button-container p{
+    font-size: 20px;
+    margin-top: 1rem;
+    margin-bottom: auto;
+    width: 100%;
+}
+
+.dashboard-navigation-select-container{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.dashboard-navigation-select-container select{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 2rem;
+    border: 0px solid white;
+    background-color: #4075FF;
+    color: white;
+    padding: .75rem;
+    border-radius: 10px;
+    margin-top: .5rem;
+    font-size: 18px;
+    filter: drop-shadow(0px 0px 31px rgba(0, 0, 0, 0.25));
+}
+
+@media screen and (max-width: 700px)  {
+    .dashboard-navigation-button-container{
+        margin-right: 2rem;
+    }
+
+    .dashboard-signup-container{
+        margin-right: 1rem;
+    }
+
+    .dashboard-signup-container p{
+        font-size: 12px;
+        padding-top: .7rem;
+        padding-bottom: .7rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .dashboard-navigation-button-container p{
+        font-size: 12px;
+    }
+
+
+    .dashboard-logo-container{
+        margin-left: 1rem;
+    }
+}

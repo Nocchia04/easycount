@@ -1,0 +1,89 @@
+.logo-container{
+    height: 3rem;
+    margin-left: 2rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.logo-container img{
+    height: 3rem;
+}
+
+.navbar-container{
+    height: 5rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.navigation-container{
+    display: flex;
+    height: 100%;
+}
+
+.navigation-button-container{
+    height: 3rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: right;
+    margin-right: 4rem;
+    text-decoration: none;
+}
+
+
+.signup-container{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 2rem;
+}
+
+
+.signup-container p{
+    background-color: #4075FF;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.navigation-button-container p{
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 1rem;
+    margin-bottom: auto;
+    width: 100%;
+}
+
+@media screen and (max-width: 700px)  {
+    .navigation-button-container{
+        margin-right: 2rem;
+    }
+
+    .signup-container{
+        margin-right: 1rem;
+    }
+
+    .signup-container p{
+        font-size: 12px;
+        padding-top: .7rem;
+        padding-bottom: .7rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .navigation-button-container p{
+        font-size: 12px;
+    }
+
+
+    .logo-container{
+        margin-left: 1rem;
+    }
+}
