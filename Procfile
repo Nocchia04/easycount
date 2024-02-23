@@ -1,4 +1,3 @@
-web: gunicorn easycount.wsgi
-release: python manage.py makemigrations
-release: python manage.py collectstatic
-release: python manage.py
+web: gunicorn easycount.wsgi:application --log-file - --log-level debug
+python manage.py collectstatic --noinput
+manage.py migrate
