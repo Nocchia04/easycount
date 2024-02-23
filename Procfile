@@ -1,0 +1,1 @@
+web gunicorn easycount.wsgi:application --log-file -
