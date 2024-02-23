@@ -13,7 +13,7 @@ function LandingPage() {
         formdata.append('email', email);
         formdata.append('description', description);
 
-        axios.post('http://localhost:8000/auth/send_mail/', formdata).then((response) => {
+        axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/auth/send_mail/', formdata).then((response) => {
             console.log(response);
             window.location.reload();
         })
