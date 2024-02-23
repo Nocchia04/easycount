@@ -1,0 +1,272 @@
+.settings-root-container {
+    width: 100%;
+    height: 120vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.settings-navbar-container {
+    position: relative;
+    height: 12.5%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-display-container {
+    position: relative;
+    height: 87.5%;
+    width: 100%;
+}
+
+.personalized-title-container {
+    position: relative;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.personalized-title {
+    position: relative;
+    font-size: 2rem;
+    font-family: 'Roboto';
+    color: #4075FF;
+    text-align: center;
+}
+
+.scopri-come {
+    position: relative;
+    text-decoration: underline;
+    transition: 0.2s ease;
+}
+
+.scopri-come:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 0.2s ease;
+}
+
+.personal-settings-container {
+    position: relative;
+    height: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.params-container {
+    position: relative;
+    width: 90%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.25);
+}
+
+.name-params-container {
+    position: relative;
+    height: 100%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}   
+
+.type-params-container {
+    position: relative;
+    height: 100%;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}  
+
+.formula-params-container {
+    position: relative;
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}   
+
+.content-params, .content-params-t {
+    position: relative;
+    width: 80%;
+    font-size: 1rem;
+    font-family: 'Roboto';
+    color: gray;
+    border-color: transparent;
+}
+
+.content-params::placeholder, .content-params-t:placeholder {
+    color: #c0c0c0;
+}
+
+.content-params-t:hover {
+    cursor: pointer;
+}
+
+.add-params-container {
+    position: relative;
+    height: 100%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}  
+
+.add-params-button {
+    position: relative;
+    width: 50%;
+    height: 60%;
+    background-color: #4075FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    transition: 0.2s ease;
+}
+
+.add-params-button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+.add-params {
+    position: relative;
+    font-size: 1rem;
+    font-family: 'Roboto';
+    color: white;
+}
+
+.my-settings-display {
+    position: relative;
+    height: 60%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.my-settings-container {
+    position: relative;
+    height: 90%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sett-container {
+    position: relative;
+    height: 20%;
+    width: 100%;
+    background-color: #4075FF;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.25);
+    margin-bottom: 1%;
+}
+
+.name-sett-container, .type-sett-container, .formula-sett-container {
+    position: relative;
+    height: 80%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sett {
+    position: relative;
+    font-size: 1.2rem;
+    font-family: 'Roboto';
+    color: white;
+}
+
+.delete-container {
+    position: relative;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-button {
+    position: relative;
+    height: 60%;
+    width: 80%;
+    background-color: white;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4075FF;
+    font-size: 1.2rem;
+    transition: 0.2s ease;
+}
+
+.delete-button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+
+@media screen and (max-width: 800px)  {
+
+    .add-params-button {
+        width: 80%;
+    }
+
+    .sett {
+        font-size: 1rem;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    .personalized-title {
+        font-size: 1.5rem;
+    }
+
+    .content-params::placeholder {
+        font-size: 0.8rem;
+    }
+
+    .add-params {
+        font-size: 0.8rem;
+    }
+
+    .name-sett-container, .type-sett-container, .formula-sett-container {
+        width: 25%;
+    }
+
+    .delete-container {
+        width: 20%;
+    }
+
+    .delete-button {
+        font-size: 1rem;
+    }
+
+    .sett {
+        font-size: 0.8rem;
+    }
+}
+

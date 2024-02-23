@@ -3,6 +3,13 @@
     margin-left: 2rem;
     margin-top: auto;
     margin-bottom: auto;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.logo-container:hover {
+    transform: scale(1.1);
+    transition: 0.3s ease;
 }
 
 .logo-container img{
@@ -22,14 +29,34 @@
 }
 
 .navigation-button-container{
-    height: 3rem;
+    height: 80%;
+    width: 6rem;
     margin-top: auto;
     margin-bottom: auto;
-    text-align: right;
     margin-right: 4rem;
     text-decoration: none;
+    background-color: #d5d5d5;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s ease;
+    cursor: pointer;
 }
 
+.navigation-button-container:hover {
+    transform: scale(1.1);
+    transition: 0.4s ease;
+}
+
+.navbar-section {
+    position: relative;
+    color: #4075FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+}
 
 .signup-container{
     margin-top: auto;
@@ -40,6 +67,7 @@
 
 .signup-container p{
     background-color: #4075FF;
+    border: 1px solid #4075FF;
     padding-top: 1rem;
     padding-bottom: 1rem;
     margin-top: auto;
@@ -50,20 +78,32 @@
     border-radius: 8px;
     font-weight: bold;
     font-size: 20px;
+    transition: 0.4s ease;
+    cursor: pointer;
 }
 
-
-.navigation-button-container p{
-    font-weight: bold;
-    font-size: 20px;
-    margin-top: 1rem;
-    margin-bottom: auto;
-    width: 100%;
+.signup-container p:hover {
+    transform: scale(1.1);
+    background-color: white;
+    color: #4075FF;
+    border: 1px solid #d9d9d9;
+    transition: 0.4s ease;
 }
 
 @media screen and (max-width: 700px)  {
+
     .navigation-button-container{
         margin-right: 2rem;
+        height: 50%;
+        width: 4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar-section {
+        position: relative;
+        font-size: 12px;
     }
 
     .signup-container{
@@ -77,11 +117,6 @@
         padding-left: 1rem;
         padding-right: 1rem;
     }
-
-    .navigation-button-container p{
-        font-size: 12px;
-    }
-
 
     .logo-container{
         margin-left: 1rem;

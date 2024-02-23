@@ -1,0 +1,262 @@
+.settings-root-display-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-navbar-container {
+    position: relative;
+    height: 12.5%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.profile-image-uploader{
+    display: none;
+}
+
+.profile-image{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.settings-image-name-container {
+    position: relative;
+    width: 100%;
+    height: 37.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid gray;
+}
+
+.settings-image-container {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-image {
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background-color: gray;    
+    transition: 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-image:hover {
+    cursor: pointer;
+    background-color: #d0d0d0;
+    transition: 0.2s ease;
+}
+
+.settings-name-container {
+    position: relative;
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.name-container {
+    position: relative;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.name-container.hidden {
+    display: none;
+}
+
+.name {
+    position: relative;
+    color: #4075FF;
+    font-size: 2rem;
+    font-family: 'Roboto';
+}
+
+.name-editing-container {
+    position: relative;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.name-editing-container.hidden {
+    display: none;
+}
+
+.editing-name {
+    position: relative;
+    width: 100%;
+    height: 50%;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+    color: #4075FF;
+    font-size: 2rem;
+    font-family: 'Roboto';
+}
+
+.edit-name-container {
+    position: relative;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-name-container.hidden {
+    display: none;
+}
+
+.icon {
+    position: relative;
+    color: #4075FF;
+    font-size: 2rem;
+    transition: 0.2s ease;
+    display: inline;
+
+}
+
+.icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.2s ease;
+    z-index: 3;
+}
+
+.icon.view {
+    display: none;
+}
+
+.name-end-container, .name-annulla-container {
+    position: relative;
+    width: 5%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.name-end-container.hidden, .name-annulla-container.hidden {
+    display: none;
+}
+
+.end-button {
+    position: relative;
+    width: 90%;
+    height: 60%;
+    border-radius: 0.2rem;
+    background-color: #4075FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.end-button:hover, .annulla-button:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.end-text {
+    position: relative;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Roboto';
+}
+
+.annulla-button {
+    position: relative;
+    width: 90%;
+    height: 60%;
+    border-radius: 0.2rem;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.annulla-text {
+    position: relative;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Roboto';
+}
+
+.settings-menu-container {
+    position: relative;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.sett-option-container {
+    position: relative;
+    width: 40%;
+    height: 30%;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    transition: 0.2s ease;
+    text-decoration: none;
+    background-color: #4075FF;
+}
+
+.sett-option-container:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+.sett-option-text {
+    position: relative;
+    color: white;
+    font-size: 1.5rem;
+    font-family: 'Roboto';
+}
+
+@media screen and (max-width: 800px) {
+    .name-container, .name-editing-container {
+        width: 30%;
+    }
+
+    .name-end-container, .name-annulla-container {
+        width: 15%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .name, .icon, .editing-name {
+        font-size: 1.5rem;
+    }
+
+    .sett-option-text {
+        font-size: 1rem;
+    }
+}

@@ -1,99 +1,159 @@
-.dashboard-logo-container{
-    height: 3rem;
-    margin-left: 2rem;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.dashboard-logo-container img{
-    height: 3rem;
-}
-
 .dashboard-navbar-container{
+    position: relative;
     height: 5rem;
-    display: flex;
     width: 100%;
     justify-content: space-between;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+}
 
+.dashboard-logo-container{
+    position: relative;
+    height: 100%;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-image{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.dashboard-logo-container img{
+    position: relative;
+    height: 3rem;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+.dashboard-logo-container img:hover {
+    transform: scale(1.1);
+    transition: 0.4s ease;
 }
 
 .dashboard-navigation-container{
     display: flex;
+    width: 50%;
     height: 100%;
+    align-items: center;
+    justify-content: right;
+}
+
+.dashboard-navigation-select-container {
+    position: relative;
+    width: 40%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-navigation-select-container select{
+    position: relative;
+    height: 60%;
+    width: 80%;
+    border: 0px solid white;
+    background-color: #4075FF;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+    cursor: pointer;
+    transition: 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-navigation-select-container select:hover {
+    opacity: 0.9;
+    transition: 0.1s ease;
+}
+
+.option {
+    cursor: pointer;
 }
 
 .dashboard-navigation-button-container{
+    position: relative;
+    width: 20%;
     height: 3rem;
-    margin-top: auto;
-    margin-bottom: auto;
-    text-align: right;
-    margin-right: 4rem;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.dashboard-navigation-button-container p{
+    position: relative;
+    font-size: 20px;
+    color: #4075FF;
+}
+
+.p-i-container {
+    position: relative;
+    height: 80%;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .profile-image-container{
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 2rem;
+    position: relative;
     background-color: #9c9c9c;
     height: 3rem;
     width: 3rem;
     border-radius: 1.5rem;
 }
 
+@media screen and (max-width: 800px)  {
 
+    .dashboard-navigation-container{
+        width: 70%;
+    }
 
-.dashboard-navigation-button-container p{
-    font-size: 20px;
-    margin-top: 1rem;
-    margin-bottom: auto;
-    width: 100%;
-}
+    .dashboard-logo-container{
+        width: 20%;
+    }
 
-.dashboard-navigation-select-container{
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.dashboard-navigation-select-container select{
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 2rem;
-    border: 0px solid white;
-    background-color: #4075FF;
-    color: white;
-    padding: .75rem;
-    border-radius: 10px;
-    margin-top: .5rem;
-    font-size: 18px;
-    filter: drop-shadow(0px 0px 31px rgba(0, 0, 0, 0.25));
-}
-
-@media screen and (max-width: 700px)  {
     .dashboard-navigation-button-container{
-        margin-right: 2rem;
-    }
-
-    .dashboard-signup-container{
-        margin-right: 1rem;
-    }
-
-    .dashboard-signup-container p{
-        font-size: 12px;
-        padding-top: .7rem;
-        padding-bottom: .7rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
+        position: relative;
+        width: 40%;
     }
 
     .dashboard-navigation-button-container p{
-        font-size: 12px;
+        font-size: 15px;
     }
 
+    .dashboard-navigation-select-container {
+        position: relative;
+        width: 30%;
+    }
 
-    .dashboard-logo-container{
-        margin-left: 1rem;
+    .dashboard-navigation-select-container select{
+        width: 100%;
+        border-radius: 7.5px;
+        font-size: 15px;
+    }
+
+    .p-i-container {
+        position: relative;
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-image-container{
+        background-color: #9c9c9c;
+        height: 2.5rem;
+        width: 2.5rem;
+        border-radius: 1.5rem;
     }
 }

@@ -1,30 +1,869 @@
-.content-section{
-    display: flex;
+* {
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 .dashboard-container{
     overflow-y: hidden;
+    width: 100%;
+}
+
+.content-section{
+    display: flex;
 }
 
 .left-navigation-bar-container{
     background-color: #4075FF;
     width: 8%;
-    height: 100vh;
+    height: calc(100vh - 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.left-navigation-bar-container div{
+.left-section{
     height: 5rem;
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+    transition: 0.1s ease;
 }
 
-.left-navigation-bar-container div p{
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.left-navigation-bar-container div:hover{
+.left-section.selected {
     background-color: #3A62C9;
 }
+
+.left-section:hover{
+    background-color: #3A62C9;
+}
+
+.left-section-text {
+    color: white;
+}
+
+.settings-container {
+    position: relative;
+    width: calc(99% - 1px);
+    height: 5rem;
+    background-color: white;
+    border: 1px solid #4075FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sliders-icon {
+    font-size: 2rem;
+    color: #4075FF;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.sliders-icon:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+.contenuto-generale-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 5rem);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.total-income-container{
+    text-align: center;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    margin-top: 1rem;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.graph-title {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.graph-income-section-container{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.total-income-container h3{
+    font-size: 40px;
+    margin-left: 1rem;
+    font-weight: 400;
+}
+
+.total-income-container p{
+    font-size: 40px;
+    color: #3A62C9;
+    font-weight: bolder;
+    margin-left: 1rem;
+}
+
+
+.left-graph-container{
+    margin-top: 1rem;
+    text-align: center;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.25);
+    width: 48%;
+    border-radius: 18px;
+}
+
+.right-graph-container{
+    margin-top: 1rem;
+    text-align: center;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.25);
+    width: 48%;
+    border-radius: 18px;
+}
+
+.contenuto-generale-container.hidden {
+    display: none;
+}
+
+.general-graph-container {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: red;
+}
+
+.general-container {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.general-container:hover {
+    transform: scale(1.025);
+    transition: 0.3s ease;
+}
+
+.client-data {
+    position: relative;
+    width: 100%;
+    height: 30%;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    display: flex;
+}
+
+.client-image-container {
+    position: relative;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1%;
+}
+
+.client-image {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+}
+
+.client-description-container {
+    position: relative;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+}
+
+.client-name {
+    color: black;
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.client-dipendenti {
+    position: relative;
+    color: black;
+    font-size: 1rem;
+}
+
+.client-content {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome-text-container {
+    position: relative;
+    height: 30%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+}
+
+.welcome-text {
+    color: black;
+    font-size: 1rem;
+}
+
+.title-dipendenti {
+    position: relative;
+    height: 20%;
+    width: 50%;
+    display: flex;
+    align-items: bottom;
+    margin-left: 5%;
+}
+
+.title-dipendenti-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.top-dipendenti {
+    position: relative;
+    height: 40%;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+}
+
+.dip {
+    position: relative;
+    height: 50%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.valutation-container {
+    position: relative;
+    height: 60%;
+    width: 60%;
+    margin-left: 5%;
+    border-radius: 5px;
+}
+
+.part1 {
+    position: relative;
+    width: 70%;
+    height: 100%;
+    background-color: #4075FF;
+    border-radius: 5px;
+}
+
+.part2 {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background-color: #4075FF;
+    border-radius: 5px;
+}
+
+.resoconto-container {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: aqua;
+}
+
+.table-resoconto-container {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    border-radius: 18px;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-resoconto-container:hover {
+    transform: scale(1.025);
+    transition: 0.3s ease;
+}
+
+.table-title-container {
+    position: relative;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tttt {
+    position: relative;
+}
+
+.table-title {
+    position: relative;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: black;
+}
+
+.table-component-container {
+    position: relative;
+    height: 90%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: blue;
+}
+
+.dashboard-table-container {
+    position: relative;
+    height: 90%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: scroll;
+}
+
+.contenuto-incassi-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
+
+.contenuto-incassi-container.hidden {
+    display: none;
+}
+
+.incassi-navbar-container {
+    position: relative;
+    width: 90%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.incassi-navbar-title {
+    position: relative;
+    font-size: 1.5rem;
+    color: #4075FF;
+    transition: 0.2s ease;
+}
+
+.incassi-navbar-title.clicked {
+    position: relative;
+    font-size: 1.5rem;
+    color: #4075FF;
+    border-bottom: 2px solid #4075FF;
+}
+
+.incassi-navbar-title:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease;
+    cursor: pointer;
+    border-bottom: 1px solid #4075FF;
+}
+
+.aggiungi-button-container {
+    position: relative;
+    width: 10%;
+    height: 60%;
+    background-color: #4075FF;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+    float: right;
+}
+
+.aggiungi-button-container:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+.aggiungi-title {
+    font-size: 0.8rem;
+    color: white;   
+}
+
+.plus {
+    display: none;
+}
+
+.visualizza-container.view {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.table-visualizza {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    overflow-y: scroll;
+}
+
+.visualizza-container {
+    display: none;
+}
+
+.graph-container.view {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.graph-container {
+    display: none;
+}
+
+.graph-visualizza {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    margin-left: 5%;
+    display: flex;
+    align-items: center;
+}
+
+.aggiungi-incassi-container {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.25);
+    background-color: white;
+    right: 0;
+    transform: translateX(200%);
+    transition: transform 0.2s ease-in-out;
+}
+
+.aggiungi-incassi-container.view {
+    transform: translateX(0%);
+    transition: transform 0.2s ease-in-out;
+}
+
+.menu-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.back {
+    position: relative;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #4075FF;
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.25);
+}
+
+.aggiungi-incassi-title {
+    position: relative;
+    margin-left: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.agg-title {
+    position: relative;
+    color: white;
+    font-size: 1.8rem;
+}
+
+.back-arrow {
+    position: relative;
+    font-size: 2rem;
+    color: white;
+    transition: 0.2s ease;
+    cursor: pointer;
+    margin-right: 5%;
+}
+
+.back-arrow:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+.add-container {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    overflow-y: scroll;
+}
+
+.add-form-container {
+    position: relative;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+} 
+
+.divisor {
+    position: relative;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.three-input {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.two-input {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-form-input{
+    position: relative;
+    width: 80%;
+    height: 2rem;
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.25);
+    border: 0px solid white;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-left: 1rem;
+    text-align: center;
+}
+
+.divisor-button {
+    margin-top: 3rem;
+    position: relative;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-button {
+    position: relative;
+    width: 20%;
+    height: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #4075FF;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.25);
+
+}
+
+.add-button:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+.add-button-title {
+    font-size: 0.8rem;
+    color: white;
+}
+
+.contenuto-dipendenti-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contenuto-dipendenti-container.hidden {
+    display: none;
+}
+
+.dipendente-container {
+    position: relative;
+    width: 90%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.dipendente-button-container {
+    position: relative;
+    width: 15%;
+    height: 60%;
+    background-color: #4075FF;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+    float: right;
+}
+
+.dipendente-button-container:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+.dipendente-title {
+    font-size: 0.8rem;
+    color: white;   
+}
+
+.visualizza-dipendenti-container {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.aggiungi-dipendenti-container {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.25);
+    background-color: white;
+    right: 0;
+    transform: translateX(100%);
+    transition: transform 0.2s ease-in-out;
+}
+
+.aggiungi-dipendenti-container.view {
+    transform: translateX(0%);
+    transition: transform 0.2s ease-in-out;
+}
+
+.add-dip-container {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    overflow-y: scroll;
+}
+
+.dipendenti-table-container {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    position: relative;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    overflow: scroll;
+}
+
+.delete-row {
+    font-size: 1.2rem;
+}
+
+.delete-row:hover {
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 700px) {
+
+    .total-income-container h3{
+        display: none;
+    }
+
+
+    .graph-income-section-container{
+        flex-direction: column;
+    }
+
+    .right-graph-container{
+        width: 100%;
+    }
+
+
+    .left-graph-container{
+        width: 100%;
+    }
+
+    .left-navigation-bar-container{
+        width: 22%;
+        height: 200vh;
+    }
+
+    .contenuto-generale-container {
+        flex-direction: column;
+        width: 78%;
+    }
+
+    .general-graph-container {
+        position: relative;
+        width: 100%;
+        height: 80%;
+    }
+
+    .resoconto-container {
+        position: relative;
+        width: 100%;
+        height: 80%;
+    }
+
+    .welcome-text-container {
+        width: 70%;
+        margin-left: 10%;
+    }
+
+    .title-dipendenti {
+        width: 70%;
+        margin-left: 10%;
+    }
+
+    .top-dipendenti {
+        width: 100%;
+        margin-left: 10%;
+    }
+
+    .client-image-container {
+        width: 40%;
+    }
+
+
+
+    .aggiungi-incassi-container.view, .aggiungi-dipendenti-container.view {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 40%;
+        background-color: white;
+    }
+
+    .visualizza-container.view {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .contenuto-incassi-container, .contenuto-dipendenti-container {
+        width: 78%;
+    }
+
+    .aggiungi-button-container {
+        position: relative;
+        width: 20%;
+        height: 30%;
+    }
+
+    .aggiungi-title, .dipendente-title {
+        display: none;
+    }
+
+    .plus {
+        display: inline;
+        position: relative;
+        font-size: 1.5rem;
+        color: white;
+    }
+
+    .table-visualizza {
+        height: 30%;
+        margin-left: 0%;
+    }
+
+    .graph-container.view {
+        align-items: first baseline;
+    }
+
+    .graph-visualizza {
+        height: 30%;
+    }
+
+    .add-button {
+        width: 30%;
+        height: 40%;
+    }
+
+    .dipendente-button-container {
+        width: 20%;
+        height: 30%;
+    }
+
+    .agg-title {
+        font-size: 1.5rem;
+    }
+
+    .op-params {
+        font-size: 1rem;
+    }
+}
+

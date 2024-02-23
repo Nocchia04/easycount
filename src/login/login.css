@@ -55,6 +55,13 @@
     margin-right: auto;
     height: 3rem;
     font-size: 20px;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    transform: scale(1.1);
+    transition: 0.4s ease;
 }
 
 .login-form p{
