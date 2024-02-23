@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 import django_on_heroku
 import dj_database_url
-
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -150,6 +150,7 @@ EMAIL_HOST_USER = 'hidev23.group@gmail.com'
 EMAIL_HOST_PASSWORD = 'jbjr wimu pnhg qrbb'
 
 
-STATIC_URL = '/static/'
- 
-django_on_heroku.settings(locals())
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'))
+django_heroku.settings(locals()) 
