@@ -153,4 +153,4 @@ EMAIL_HOST_PASSWORD = 'jbjr wimu pnhg qrbb'
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'))
-django_heroku.settings(locals()) 
+django_on_heroku.settings(locals()) 
