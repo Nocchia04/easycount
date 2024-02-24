@@ -5,6 +5,8 @@ import './settingsIncassi.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import Joyride from 'react-joyride';
+import { ColorRing } from 'react-loader-spinner';
+
 
 const Settings = () =>  {
   const [params, setParams] = useState({});
@@ -14,8 +16,11 @@ const Settings = () =>  {
   const [fieldType, setFieldType] = useState('');
   const [fieldComposite, setFieldComposite] = useState('')
   const id = localStorage.getItem('user_id')
+  const [isLoading, setLoadingActive] = useState(false)
+
 
   const sendNewParameter = () => {
+    setLoadingActive(true)
 
     const document = {
       'id' : id,
@@ -37,11 +42,13 @@ const Settings = () =>  {
           }
         })
       }
+      setLoadingActive(false)
     })
 
   }
 
   const deleteParam = (key) => {
+    setLoadingActive(true)
     console.log(key)
     const formdata = new FormData();
     formdata.append('id', id);
@@ -58,6 +65,7 @@ const Settings = () =>  {
         })
       }
     })
+    setLoadingActive(false)
   }
 
 
@@ -136,6 +144,15 @@ const Settings = () =>  {
 
   return (
     <div className='settings-root-container'>
+      {isLoading === true && (
+          <div className='overlay'>
+              <div className='spinner'>
+              <ColorRing
+                  colors={['white', 'white', 'white', 'white', 'white']}
+                  />
+              </div>
+          </div>
+      )}
       <Joyride 
         steps={steps}
         run={runTutorial}
@@ -167,7 +184,14 @@ const Settings = () =>  {
               <input className='content-params' placeholder='Nome formula...' type='text' onChange={(e) => setFieldName(e.target.value)}/>
             </div>
             <div className='type-params-container'>
-              <input className='content-params' placeholder='Tipo...' type='text' onChange={(e) => setFieldType(e.target.value)}/>
+              <select className='content-params-t' onChange={(e) => setFieldType(e.target.value)}>
+                <option value="">Tipo...</option>
+                <option value="text">Text</option>
+                <option value="number">Number</option>
+                <option value="date">Date</option>
+                <option value="operator">Operatori</option>
+                <option value="composite">Composite</option>
+              </select>
             </div>
             <div className='formula-params-container'>
               <input className='content-params' placeholder='A*B/C...' type='text' onChange={(e) => setFieldComposite(e.target.value)}/>

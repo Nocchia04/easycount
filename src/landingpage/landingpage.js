@@ -2,11 +2,15 @@ import React, { useState } from 'react'
 import './landingpage.css'
 import Navbar from '../navbar/navbar'
 import landingimage from '../images/Image_slide.png'
+import { ColorRing } from 'react-loader-spinner';
 import axios from 'axios'
 
 function LandingPage() {
 
+    const [isLoading, setLoadingActive] = useState(false)
+
     const sendEmail = () => {
+        setLoadingActive(true);
         const formdata = new FormData();
         formdata.append('name', name);
         formdata.append('surname', surname);
@@ -15,6 +19,7 @@ function LandingPage() {
 
         axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/auth/send_mail/', formdata).then((response) => {
             console.log(response);
+            setLoadingActive(false);
             window.location.reload();
         })
 
@@ -32,6 +37,15 @@ function LandingPage() {
     }
   return (
     <div>
+        {isLoading === true && (
+            <div className='overlay'>
+                <div className='spinner'>
+                <ColorRing
+                    colors={['white', 'white', 'white', 'white', 'white']}
+                    />
+                </div>
+            </div>
+        )}
       <Navbar/>
       <div className='top-slide-container'>
         <div className='top-slide-slogan'>

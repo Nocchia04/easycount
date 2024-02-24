@@ -11,6 +11,7 @@ import './dipendentiTable.css'
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { ColorRing } from 'react-loader-spinner';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -34,15 +35,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(NomeDipendente, Stipendio, Pagato, Clienti, Bonus) {
-  return { NomeDipendente, Stipendio, Pagato, Clienti, Bonus }; 
-}
-
-const rows = [
-  createData('Carlo', 460, "no", 159, 5000),
-  createData('Mirko', 2500, "si", 200, "no"),
-  createData('Piero', 1200, "si", 450, "no"),
-];
 
 function DipendentiTable({ currentOperators, onDelete }) {
 
@@ -51,6 +43,7 @@ function DipendentiTable({ currentOperators, onDelete }) {
   const [isRequestMadeOperators, setIsRequestMadeOperators] = useState(false)
   const [editingMode, setEditingMode] = useState(false)
   const [EditedEarning, setEditedEarning] = useState({})
+  const [isLoading, setLoadingActive] = useState(false)
 
 
   useEffect(() => {
@@ -87,6 +80,7 @@ function DipendentiTable({ currentOperators, onDelete }) {
   })
 
     const deleteOperator = (value) => {
+      setLoadingActive(true)
       const request = {
         'id' : localStorage.getItem('user_id'),
         'operator' : value
@@ -95,6 +89,7 @@ function DipendentiTable({ currentOperators, onDelete }) {
         if(response.data.status == "success"){
           currentOperators = response.data.data
           onDelete();
+          setLoadingActive(false)
         }
       })
     }
@@ -102,6 +97,15 @@ function DipendentiTable({ currentOperators, onDelete }) {
 
     return(
       <TableContainer component={Paper}>
+        {isLoading === true && (
+              <div className='overlay'>
+                  <div className='spinner'>
+                  <ColorRing
+                      colors={['white', 'white', 'white', 'white', 'white']}
+                      />
+                  </div>
+              </div>
+          )}
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -123,13 +127,20 @@ function DipendentiTable({ currentOperators, onDelete }) {
               return(
               <StyledTableRow defaultValue={"-"}>
               {
-                  Object.entries(value).map(([index, number ]) => {
-                    if(headersDipendenti['params'][index]){
-                      return(
-                        <StyledTableCell align='center'>{editingMode ? <input type="text" className='edit-input-form' placeholder={index} /> : <p>{number}</p> }</StyledTableCell>
-                      )
-                    }
-                  })
+                headersDipendenti.params != undefined && headersDipendenti.params!= null ? 
+                Object.entries(headersDipendenti.params).map(([param, type]) => {
+                  if(value[param] != undefined){
+                    return(
+                      <StyledTableCell align='center'>{value[param]}</StyledTableCell>
+                    )
+                  }else{
+                    return(
+                      <StyledTableCell align="center">-</StyledTableCell>
+                    )
+                  }
+                })
+                : <div/>
+                  
               }
               <StyledTableCell align='center'><FontAwesomeIcon icon={faTrash} className='delete-row' onClick={() => deleteOperator(value)}/></StyledTableCell>
               </StyledTableRow>

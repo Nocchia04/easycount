@@ -6,18 +6,23 @@ import DashboardNavbar from '../dashboard/dashboard-navbar/dashboardnavbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentDollar, faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import { ColorRing } from 'react-loader-spinner';
+
  
 function Settings() {
 
   const [img, setImg] = useState(true);
   const [edit, setEdit] = useState(true);
   const [nameValue, setNameValue] = useState(localStorage.getItem('username'));
+  const [isLoading, setLoadingActive] = useState(false)
+
 
   const handleNameChange = (event) => {
     setNameValue(event.target.value)
   };
 
   const sendNewUsername = () => {
+    setLoadingActive(true)
     const formdata = new FormData();
     formdata.append('id', localStorage.getItem('user_id'));
     formdata.append('username', nameValue)
@@ -25,12 +30,14 @@ function Settings() {
       if(response.data.status == "success"){
         console.log(response.data.data.username)
         localStorage.setItem("username", response.data.data.username)
+        setLoadingActive(false)
         window.location.reload()
       }
     })
   }
 
   const handleImageUpload = (e) => {
+    setLoadingActive(true)
     const formdata = new FormData();
     const image = e.target.files[0]
     console.log(image)
@@ -40,6 +47,7 @@ function Settings() {
       if(response.data.status == "success"){
         console.log(response.data.data.profile_image.$binary.base64)
         localStorage.setItem('profile_image', response.data.data.profile_image.$binary.base64)
+        setLoadingActive(false)
         window.location.reload()
       } 
     })
@@ -47,6 +55,15 @@ function Settings() {
 
   return (
     <div className='settings-root-display-container'>
+      {isLoading === true && (
+          <div className='overlay'>
+              <div className='spinner'>
+              <ColorRing
+                  colors={['white', 'white', 'white', 'white', 'white']}
+                  />
+              </div>
+          </div>
+      )}
       <div className='settings-navbar-container'>
         <DashboardNavbar/>
       </div>

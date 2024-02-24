@@ -6,6 +6,8 @@ import { faLocationPinLock, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import Joyride from 'react-joyride';
 import axios from 'axios';
+import { ColorRing } from 'react-loader-spinner';
+
 
 
 
@@ -18,6 +20,8 @@ function SettingsDipendenti() {
   const [fieldType, setFieldType] = useState('');
   const [fieldComposite, setFieldComposite] = useState('')
   const id = localStorage.getItem('user_id')
+  const [isLoading, setLoadingActive] = useState(false)
+
 
   useEffect(() => {
     const getParams = () => {
@@ -43,6 +47,7 @@ function SettingsDipendenti() {
   })
 
   const sendNewParameter = () => {
+    setLoadingActive(true)
 
     const document = {
       'id' : id,
@@ -65,7 +70,7 @@ function SettingsDipendenti() {
         })
       }
     })
-
+    setLoadingActive(false)
   }
 
   const deleteParam = (key) => {
@@ -137,6 +142,15 @@ function SettingsDipendenti() {
 
   return (
     <div className='settings-root-container'>
+      {isLoading === true && (
+          <div className='overlay'>
+              <div className='spinner'>
+              <ColorRing
+                  colors={['white', 'white', 'white', 'white', 'white']}
+                  />
+              </div>
+          </div>
+      )}
       <Joyride 
         steps={steps}
         run={runTutorial}

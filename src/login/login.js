@@ -3,15 +3,18 @@ import Navbar from '../navbar/navbar';
 import './login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ColorRing } from 'react-loader-spinner';
 
 function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
+  const [isLoading, setLoadingActive] = useState(false)
 
   const navigate = useNavigate()
 
   const hadleLogin = () => {
+    setLoadingActive(true);
     const formdata = new FormData();
     formdata.append('email', email);
     formdata.append('password', password);
@@ -26,6 +29,7 @@ function Login() {
         localStorage.setItem('username', response.data.username)
         localStorage.setItem('profile_image', response.data.profile_image)
         navigate('/dashboard')
+        setLoadingActive(false);
         window.location.reload();
       } 
     })
@@ -33,6 +37,15 @@ function Login() {
 
   return (
     <div>
+      {isLoading === true && (
+          <div className='overlay'>
+              <div className='spinner'>
+              <ColorRing
+                  colors={['white', 'white', 'white', 'white', 'white']}
+                  />
+              </div>
+          </div>
+      )}
       <Navbar/>
       <div className='login-page-container'>
         <div className='login-background-image-container'>

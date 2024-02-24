@@ -11,6 +11,8 @@ import './dashboardTable.css'
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { ColorRing } from 'react-loader-spinner';
+
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -34,20 +36,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(Giorno, POS1, POS2, Contanti, Totale, Scarto, SpeseExtra, TotaleEffettivo, NumeroCoperti, ScontrinoMedio) {
-  return { Giorno, POS1, POS2, Contanti, Totale, Scarto, SpeseExtra, TotaleEffettivo, NumeroCoperti, ScontrinoMedio };
-}
-
-const rows = [
-  createData('26/01/05', 74, 46, 159, 179, 5, 20, 159, 84, 23),
-  createData('26/01/05', 74, 46, 159, 179, 5, 20, 159, 84, 23),
-  createData('26/01/05', 74, 46, 159, 179, 5, 20, 159, 84, 23),
-  createData('26/01/05', 74, 46, 159, 179, 5, 20, 159, 84, 23),
-  createData('26/01/05', 74, 46, 159, 179, 5, 20, 159, 84, 23),
-  createData('26/01/05', 74, 46, 159, 179, 5, 20, 159, 84, 23),
-
-];
-
 export default function DashboardTable({ currentEarnings, onDelete }) {
 
   const [earnings, setEarnings] = useState({})
@@ -56,6 +44,7 @@ export default function DashboardTable({ currentEarnings, onDelete }) {
   const [editingMode, setEditingMode] = useState(false)
   const [oldEarnings, setOldEarnigns] = useState(earnings)
   const [EditedEarning, setEditedEarning] = useState({})
+  const [isLoading, setLoadingActive] = useState(false)
 
 
 
@@ -99,21 +88,31 @@ export default function DashboardTable({ currentEarnings, onDelete }) {
 
 
   const deleteEarning = (value) => {
+    setLoadingActive(true)
     const request = {
       'id' : localStorage.getItem('user_id'),
       'earning' : value
     }
-    axios.post('https://easycount-8a1d6b5ada49.herokuapp./inputs/delete_earning/', request).then((response) => {
+    axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/inputs/delete_earning/', request).then((response) => {
       if(response.data.status == "success"){
         currentEarnings = response.data.data
         onDelete();
+        setLoadingActive(false)
       }
     })
   }
 
-
   return (
     <TableContainer component={Paper}>
+      {isLoading === true && (
+          <div className='overlay'>
+              <div className='spinner'>
+              <ColorRing
+                  colors={['white', 'white', 'white', 'white', 'white']}
+                  />
+              </div>
+          </div>
+      )}
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -125,7 +124,7 @@ export default function DashboardTable({ currentEarnings, onDelete }) {
                   <StyledTableCell align='center'>{key}</StyledTableCell>
                 )
               })
-              : console.log('aspettando gli header...')
+              : <div/>
             }
             <StyledTableCell align='center'>Elimina</StyledTableCell>
           </TableRow>
@@ -135,18 +134,27 @@ export default function DashboardTable({ currentEarnings, onDelete }) {
             Object.entries(currentEarnings).map(([key, value]) => {
               return(
               <StyledTableRow defaultValue={"-"}>
+                <StyledTableCell align='center'>{value['date']}</StyledTableCell>
               {
-                Object.entries(value).map(([index, number ]) => {
+                headers.params != undefined && headers.params!= null ? 
+                Object.entries(headers.params).map(([param, type]) => {
+                  if(value[param]!= undefined){
                     return(
-                      <StyledTableCell align='center'>{editingMode ? <input type="text" className='edit-input-form' placeholder={index} /> : <p>{number}</p> }</StyledTableCell>
+                      <StyledTableCell align='center'>{value[param]}</StyledTableCell>
                     )
+                  }else{
+                    return(
+                      <StyledTableCell align='center'>-</StyledTableCell>
+                    )
+                  }
                 })
+                : <div/>
               }
               <StyledTableCell align='center'><FontAwesomeIcon icon={faTrash} className='delete-row' onClick={() =>deleteEarning(value)}/></StyledTableCell>
               </StyledTableRow>
               )
             })
-            : console.log("aspettando i dati...")
+            : <div/>
           }
         </TableBody>
       </Table>

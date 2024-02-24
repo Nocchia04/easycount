@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 import DashboardTable from './IncassiTable/dashboardTable';
 import DipendentiTable from './DipendentiTable/dipendentiTable';
+import { ColorRing } from 'react-loader-spinner';
 
 const getCurrentDate = () => {
   const currentDate = new Date();
@@ -31,6 +32,7 @@ const getCurrentDate = () => {
 
 function Dashboard() {
 
+  const [isLoading, setLoadingActive] = useState(false)
   const [choose, setChoose] = useState("generale")
   const [dipendenti, setDipendenti] = useState("false")
   const [incassi, setIncassi] = useState("visualizza")
@@ -96,18 +98,22 @@ function Dashboard() {
   }
   
   const uploadEarning = () => {
+    setLoadingActive(true);
     axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/inputs/new_earning/', earning).then((response) => {
       if(response.data.status == 'success') {
         getEarnings();
+        setLoadingActive(false);
         setMenu("false")
       }
     } )
   }
 
   const uploadNewOperator = () => {
+    setLoadingActive(true);
     axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/inputs/new_operator/', operator).then((response) => {
       if(response.data.status == 'success') {
         getOperators();
+        setLoadingActive(false);
         setDipendenti("false")
       }
     } )
@@ -177,20 +183,18 @@ function Dashboard() {
       setIsRequestMade(true);
     }
   })
-  
-
-  const data = [
-    { name: 'Lunedì', euro: 300 },
-    { name: 'Martedì', euro: 450 },
-    { name: 'Mercoledì', euro: 600 },
-    { name: 'Giovedì', euro: 150 },
-    { name: 'Vederdì', euro: 200 },
-    { name: 'Sabato', euro: 550 },
-    { name: 'Domenica', euro: 350}
-  ];
 
   return (
     <div className='dashboard-container'>
+      {isLoading === true && (
+        <div className='overlay'>
+            <div className='spinner'>
+            <ColorRing
+                colors={['white', 'white', 'white', 'white', 'white']}
+                />
+            </div>
+        </div>
+      )}
       <div className='db-c'>
         <DashboardNavbar/>
       </div>
