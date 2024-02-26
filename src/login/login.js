@@ -64,7 +64,10 @@ function Login() {
             <div className='login-form'>
                 <p>Accedi</p>
                 {
-                  usernamePasswordError == "error" ? <div className='credentials-error-container'><h6 className='credentials-error-message'>Ops! Qualcosa è andato storto, ricontrolla username e password!</h6></div> : <div/>
+                  usernamePasswordError == "error" ? 
+                  <div className='credentials-error-container'>
+                    <h6 className='credentials-error-message'>Ops! Qualcosa è andato storto, ricontrolla username e password!</h6>
+                  </div> : <div></div>
                 }
                 <div className='login-form-container'>
                   <input className='login-form-input' placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>

@@ -148,4 +148,15 @@
         width: 2.5rem;
         border-radius: 1.5rem;
     }
+
+    .dashboard-logout-container {
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .dashboard-logout-container {
+        width: 20%;
+    }
 }

@@ -13,6 +13,8 @@ import axios from 'axios'
 import DashboardTable from './IncassiTable/dashboardTable';
 import DipendentiTable from './DipendentiTable/dipendentiTable';
 import { ColorRing } from 'react-loader-spinner';
+import { Carousel } from 'react-responsive-carousel'
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const getCurrentDate = () => {
   const currentDate = new Date();
@@ -253,8 +255,11 @@ function Dashboard() {
                   : <div/>
                 }
             </select>
-            <h3>Incassi totali: </h3>
-            <p>€{totalIncome}</p>
+            <div className='total-income-text-container'>
+              <h3>Totale di "{selectedParamGraph}": </h3>
+              <p>€{totalIncome}</p>
+            </div>
+            
           </div>
           <div className='graph-income-section-container'>
             <div className='left-graph-container'>
@@ -356,6 +361,182 @@ function Dashboard() {
             </div>
             
             <div className={dipendenti==='true' ? 'aggiungi-dipendenti-container view' : 'aggiungi-dipendenti-container'}>
+              <div className='back'>
+                  <div className='aggiungi-incassi-title'>
+                    <p className='agg-title'>Aggiungi un dipendente</p>
+                  </div>
+                  <FontAwesomeIcon className='back-arrow' icon={faArrowRight} onClick={() => setDipendenti('false')}/>
+              </div>
+              <div className='add-dip-container'>
+              <div className='add-form-container'>
+                    {
+                      inputsDipendenti.params != null && inputsDipendenti.params != undefined ?
+                        Object.entries(inputsDipendenti?.params)?.map(([key, value]) => {
+                          if(value != "composite"){
+                            return(
+                            <div className='three-input'>
+                              <input className='add-form-input' placeholder={key} type={value} onChange={(e) => addOperator(key, e.target.value)}/>
+                            </div>
+                            )
+                          }
+                        })
+                      : <div/>
+                    }
+                    <div className='divisor-button'>
+                      <div className='add-button' onClick={uploadNewOperator}>
+                        <p className='add-button-title'>Aggiungi</p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div className='content-section-mobile'>
+        <div className='left-navigation-bar-container-mobile'>
+          <div className={choose==="generale" ? 'left-section selected' : 'left-section'} onClick={() => setChoose('generale')}>
+            <p className='left-section-text'>Generale</p>
+          </div>
+          <div className={choose==="incassi" ? 'left-section selected' : 'left-section'} onClick={() => setChoose('incassi')}>
+            <p className='left-section-text'>Incassi</p>
+          </div>
+          <div className={choose==="dipendenti" ? 'left-section selected' : 'left-section'} onClick={() => setChoose('dipendenti')}>
+            <p className='left-section-text'>Dipendenti</p>
+          </div>
+          <div className='settings-container-mobile'>
+            <Link to={"/settings"}><FontAwesomeIcon className='sliders-icon' icon={faSliders} /></Link>         
+          </div>
+        </div>
+
+        <div className={choose==="generale" ? 'contenuto-generale-container' : 'contenuto-generale-container hidden'}>
+          <div className='total-income-container-mobile'>
+            <select onChange={(e) => setSelectedParamGraph(e.target.value)} className='content-params-t-dashboard'>
+                <option value="undefined">Tipo...</option>
+                { 
+                  graphParams.params != null && graphParams.params != undefined ?
+                    Object.entries(graphParams?.params)?.map(([key, value]) => {
+                        return(
+                          <option className='add-form-input-mobile' value={key}>{key}</option>
+                        )
+                    })
+                  : <div/>
+                }
+            </select>
+            <div className='total-income-text-container'>
+              <h3>Totale di "{selectedParamGraph}": </h3>
+              <p>€{totalIncome}</p>
+            </div>
+            
+          </div>
+          <div className='graph-income-section-container'>
+            <Carousel autoPlay interval={3000} infiniteLoop showStatus={false}  showThumbs={false} className='c-container'>
+                <div className='carousel-graph'>
+                  <div className='left-graph-container'>
+                    <div className='graph-title-container'>
+                      <p className='graph-title'>Andamento annuale</p>
+                    </div>
+                    <div className='graph-component-container'>
+                      <ResponsiveContainer  width="90%" aspect={4.0/3.0}>
+                        <LineChart data={monthlyGraph} >
+                          <XAxis dataKey="Mese" />
+                          <YAxis/>
+                          <Tooltip />
+                          <Legend />
+                          <Line type="monotone" dataKey="euro" stroke="#4075FF" />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+                </div>
+
+                <div className='carousel-graph'>
+                  <div className='right-graph-container'>
+                    <div className='graph-generale-container' onClick={() => setChoose('incassi')}>
+                      <div className='graph-title-container'>
+                        <p className='graph-title'>Non male per questa settimana!</p>
+                      </div>
+                      <div className='graph-component-container'>
+                        <ResponsiveContainer width="90%" aspect={4.0/3.0}>
+                          <BarChart data={weeklyGraph}>
+                            <XAxis dataKey="Giorno" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="euro" fill="#4075FF"/>
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </Carousel>
+          </div>
+        </div>
+
+        <div className={choose==="incassi" ? 'contenuto-incassi-container' : 'contenuto-incassi-container hidden'}>
+          <div className='incassi-navbar-container'>
+            <div className='aggiungi-button-container' onClick={showInputs}>
+              <p className='aggiungi-title'>Aggiungi Incasso</p>
+              <FontAwesomeIcon icon={faPlus} className='plus'/>
+            </div>
+          </div>
+          
+          <div className={incassi==="visualizza" ? 'visualizza-container view' : 'visualizza-container'}>
+            <div className='table-visualizza' style={{opacity: menu === 'true' ? '0.5' : '1'}}>
+                <DashboardTable currentEarnings={currentEarnings} onDelete={getEarnings} />
+            </div>
+            <div className={menu==='true' ? 'aggiungi-incassi-container-mobile view' : 'aggiungi-incassi-container-mobile'}>
+              <div className='menu-container'>
+                <div className='back'>
+                  <div className='aggiungi-incassi-title'>
+                    <p className='agg-title'>Aggiungi un incasso</p>
+                  </div>
+                  <FontAwesomeIcon className='back-arrow' icon={faArrowRight} onClick={() => setMenu('false')}/>
+                </div>
+                <div className='add-container'>
+                  <div className='add-form-container'>
+                    {
+                      inputs.params != null && inputs.params != undefined ?
+                        Object.entries(inputs?.params)?.map(([key, value]) => {
+                          if(value != "composite"){
+                            return(
+                            <div className='three-input'>
+                              <input className='add-form-input' placeholder={key} type={value} onChange={(e) => addEarning(key, e.target.value)}/>
+                            </div>
+                            )
+                          }
+                        })
+                      : <div/>
+                    }
+                    <div className='divisor-button'>
+                      <div className='add-button' onClick={uploadEarning}>
+                        <p className='add-button-title'>Aggiungi</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={choose==="dipendenti" ? 'contenuto-dipendenti-container' : 'contenuto-dipendenti-container hidden'}>
+          <div className='dipendente-container'>
+            <div className='dipendente-button-container' onClick={showInputsDipdendenti}>
+              <p className='dipendente-title'>Aggiungi Dipendente</p>
+              <FontAwesomeIcon icon={faPlus} className='plus'/>
+            </div>
+          </div>
+
+          <div className='visualizza-dipendenti-container'>
+            <div className='dipendenti-table-container' style={{opacity: dipendenti === 'true' ? '0.5' : '1'}}>
+              <DipendentiTable currentOperators={currentOperators} onDelete={getOperators}/>
+            </div>
+            
+            <div className={dipendenti==='true' ? 'aggiungi-dipendenti-container-mobile view' : 'aggiungi-dipendenti-container-mobile'}>
               <div className='back'>
                   <div className='aggiungi-incassi-title'>
                     <p className='agg-title'>Aggiungi un dipendente</p>

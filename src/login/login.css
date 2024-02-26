@@ -26,20 +26,22 @@
     filter: drop-shadow(0px 0px 31px rgba(0, 0, 0, 0.25));
 }
 
+.credentials-error-container{
+    position: relative;
+    width: 50%;
+    height: 20%;
+    background-color: rgba(255, 0, 0, 0.1);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 0.5px solid red;
+}
+
 .credentials-error-message {
     font-size: 1rem;
     font-weight: 300;
     color: red;
     text-align: center;
-}
-
-.credentials-error-container{
-    width: 50%;
-    background-color: rgba(255, 0, 0, 0.1);
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin-bottom: 1rem;
-    border: 0.5px solid red;
 }
 
 .login-form-container {
