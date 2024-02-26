@@ -155,7 +155,7 @@ function Dashboard() {
     const formdata = new FormData();
     formdata.append('id', localStorage.getItem('user_id'))
     formdata.append('param', selectedParamGraph)
-    axios.post('http://localhost:8000/auth/total_earnings/', formdata).then((response) => {
+    axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/auth/total_earnings/', formdata).then((response) => {
       if(response.data.status == 'success'){
         setTotalIncome(response.data.total)
       }
@@ -167,7 +167,7 @@ function Dashboard() {
     const formdata = new FormData();
     formdata.append('id', localStorage.getItem('user_id'));
     formdata.append('param', selectedParamGraph)
-    axios.post('http://localhost:8000/auth/week_graph_earnings/', formdata).then((response) => {
+    axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/auth/week_graph_earnings/', formdata).then((response) => {
       if(response.data.status == "success"){
         setWeeklyGraph(response.data.data)
       }
@@ -179,7 +179,7 @@ function Dashboard() {
     const formdata = new FormData();
     formdata.append('param', selectedParamGraph)
     formdata.append('id', localStorage.getItem('user_id'));
-    axios.post('http://localhost:8000/auth/monthly_graph_earnings/', formdata).then((response) => {
+    axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/auth/monthly_graph_earnings/', formdata).then((response) => {
       if(response.data.status == "success"){
         setMonthlyGraph(response.data.data)
       }
