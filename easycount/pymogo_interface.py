@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 import bson.json_util as json_util
 import ast
-from pymongo.server_api import ServerApi
 
 def cursor_to_json(cursor):
     list_cursor = list(cursor)
@@ -24,7 +23,7 @@ def connect_to_db(db):
 
 def get_db_handle(db_name, host, port, username, password):
     uri = "mongodb+srv://hidev23group:cAQi0GhgXAcHdZIR@hidev.a25livf.mongodb.net/?retryWrites=true&w=majority&appName=HiDev"
-    client = MongoClient(uri, server_api=ServerApi('1'))
+    client = MongoClient(uri)
     db_handle = client[db_name]
     return db_handle, client
 

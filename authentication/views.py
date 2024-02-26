@@ -85,6 +85,7 @@ def contact_form(request):
 @api_view(['POST'])
 def total_earnings(request):
     id = request.POST['id']
+    param = request.POST['param']
     collection = connect_to_db('user-inputs')
     cursor = collection.find({'id' : id})
     users = cursor_to_json(cursor)
@@ -99,13 +100,12 @@ def total_earnings(request):
     users = cursor_to_json(cursor)
     user_earnings = users[0]
     earnings = user_earnings['earnings']
-
     total = 0
-    for input_name in params:
-        for earning in earnings:
-            if earning[input_name] and not params[input_name] == "composite":
-                print(input_name, earning[input_name])
-                total = total + earning[input_name]
+    if param == "undefined":
+        param = list(params.keys())[0]
+    for earning in earnings:
+        if param in earning:
+            total = total + earning[param]
     return JsonResponse({'status' : 'success', 'total' : total})
 
 
@@ -114,6 +114,7 @@ def total_earnings(request):
 def week_graph_earnings(request):
     id = request.POST['id']
     collection = connect_to_db('user-earnings')
+    param = request.POST['param']
     cursor = collection.find({'id' : id})
     users = cursor_to_json(cursor)
     user_earnings = users[0]
@@ -139,15 +140,15 @@ def week_graph_earnings(request):
         { "Giorno" : 6, "euro" : 0},
         { "Giorno" : 7, "euro" : 0},
     ]
+    if param == "undefined":
+        param = list(params.keys())[0]
     for earning in earnings: 
         date = datetime.strptime(earning['date'], "%d-%m-%Y")
         if current_week_start <= date <= current_week_end:
-             print("SONO DENTRO")
-             for param in params:
-                 if params[param] != "composite" and earning[param]:
+            if param in earning:
                     day_of_week = date.weekday()
                     for elem in result:
-                        if elem["Giorno"] == day_of_week:
+                        if elem["Giorno"] == day_of_week +1:
                             elem["euro"] += earning[param]
                      
     return JsonResponse({
@@ -159,6 +160,7 @@ def week_graph_earnings(request):
 @api_view(['POST'])
 def monthly_graph_earnings(request):
     id = request.POST['id']
+    param = request.POST['param']
     collection = connect_to_db('user-earnings')
     cursor = collection.find({'id' : id})
     users = cursor_to_json(cursor)
@@ -186,15 +188,16 @@ def monthly_graph_earnings(request):
         {"Mese" : 11, "euro" : 0},
         {"Mese" : 12, "euro" : 0},
     ]
+    if param == "undefined":
+        param = list(params.keys())[0]
     for earning in earnings:
         date = datetime.strptime(earning['date'], "%d-%m-%Y")
         if today.year == date.year:
-            for param in params:
-                if params[param] != "composite" and earning[param]:
-                    month = date.month
-                    for elem in result:
-                        if elem["Mese"] == month:
-                            elem["euro"] += earning[param]
+            if param in earning:
+                month = date.month
+                for elem in result:
+                    if elem["Mese"] == month:
+                        elem["euro"] += earning[param]
     return JsonResponse({
         'status' : 'success',
         'data' : result

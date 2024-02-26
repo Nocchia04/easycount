@@ -1,9 +1,8 @@
 from pymongo import MongoClient
 from bson import ObjectId
-from pymongo.server_api import ServerApi
 
 uri = "mongodb+srv://hidev23group:cAQi0GhgXAcHdZIR@hidev.a25livf.mongodb.net/?retryWrites=true&w=majority&appName=HiDev"
-client = MongoClient(uri, server_api=ServerApi('1'))
+client = MongoClient(uri)
 db = client['easycount']
 users_collection = db['credentials']
 
