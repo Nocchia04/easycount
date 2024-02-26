@@ -21,6 +21,7 @@ function SettingsDipendenti() {
   const [fieldComposite, setFieldComposite] = useState('')
   const id = localStorage.getItem('user_id')
   const [isLoading, setLoadingActive] = useState(false)
+  const [errorInFielads, setErrorInFields] = useState("correct")
 
 
   useEffect(() => {
@@ -29,10 +30,8 @@ function SettingsDipendenti() {
       formdata.append('id', id)
       axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/inputs/get_operators_inputs/', formdata).then((response) => {
         if(response.data.status == 'success'){
-          console.log(response.data.data)
           setParams(response.data.data.params)
           setComposite(response.data.data.composite_settings)
-          console.log(composite)
         }else{
           console.log(response.data)
         }
@@ -55,6 +54,12 @@ function SettingsDipendenti() {
       'composite_settings' : composite,
     }
 
+    if(fieldName == '' || fieldType == ''){
+      setErrorInFields("error")
+      setLoadingActive(false)
+      return;
+    }
+
     document['new_operators_inputs'][fieldName] = fieldType
     document['composite_settings'][fieldName] = fieldComposite
 
@@ -70,11 +75,12 @@ function SettingsDipendenti() {
         })
       }
     })
+    setErrorInFields("correct")
     setLoadingActive(false)
   }
 
   const deleteParam = (key) => {
-    console.log(key)
+    setLoadingActive(true)
     const formdata = new FormData();
     formdata.append('id', id);
     formdata.append('input_name', key)
@@ -90,6 +96,7 @@ function SettingsDipendenti() {
         })
       }
     })
+    setLoadingActive(false)
   }
 
 
@@ -139,6 +146,8 @@ function SettingsDipendenti() {
       setRunTutorial(false);
     }
   };
+
+  
 
   return (
     <div className='settings-root-container'>
@@ -202,6 +211,9 @@ function SettingsDipendenti() {
         </div>
         <div className='my-settings-display'>
           <div className='my-settings-container'>
+          {
+            errorInFielads == "error" ? <div className='error-in-fields-container'><h4 className='error-in-fields-text'>Errore nei campi, controlla che siano tutti inseriti correttamente</h4></div> : <div/>
+          }
           {
               Object.entries(params).map(([key, value]) => {
                 if(value != "composite"){

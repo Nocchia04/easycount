@@ -94,7 +94,7 @@ function Settings() {
               </div>
           </div>
           <div className={edit ? 'name-annulla-container hidden':'name-annulla-container'} onClick={() => setEdit(true)}>
-              <div className='annulla-button'>
+              <div className='annulla-button' onClick={() => window.location.reload()}>
                 <p className='annulla-text'>Annulla</p>
               </div>
           </div>

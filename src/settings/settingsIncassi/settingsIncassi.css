@@ -16,6 +16,20 @@
     justify-content: center;
 }
 
+.error-in-fields-container{
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid red;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.error-in-fields-text{
+    font-size: 1rem;
+    font-weight: 300;
+    color: red;
+    margin-left: 1rem;
+}
+
 .settings-display-container {
     position: relative;
     height: 87.5%;

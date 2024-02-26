@@ -116,6 +116,10 @@
     cursor: pointer;
 }
 
+.content-params.error {
+    border: 2px solid red; /* Bordo nero in caso di errore */
+  }
+
 .add-params-container {
     position: relative;
     height: 100%;

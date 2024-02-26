@@ -30,8 +30,8 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/dashboard' element={localStorage.getItem('access_token') ? <Dashboard/> : <Login/>}/>
         <Route path='/settings' element={localStorage.getItem('access_token') ? <Settings/> : <Login/>}/>
-        <Route path='/settings/incassi' element={<SettingsIncassi/>}/>
-        <Route path='/settings/dipendenti' element={<SettingsDipendenti/>}/>
+        <Route path='/settings/incassi' element={localStorage.getItem('access_token') ? <SettingsIncassi/> : <Login/>}/>
+        <Route path='/settings/dipendenti' element={localStorage.getItem('access_token') ? <SettingsDipendenti/> : <Login/>}/>
       </Routes>
     </BrowserRouter>
   );

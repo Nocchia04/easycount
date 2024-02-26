@@ -45,6 +45,9 @@ function Dashboard() {
     'inputs' : {}
   })
 
+  const [selectedParamGraph, setSelectedParamGraph] = useState("undefined")
+  const [graphParams, setGraphParams] = useState({})
+
   const [isRequestMade, setIsRequestMade] = useState(false)
   const [currentEarnings, setCurrentEarnings] = useState({})
   const [currentOperators, setCurrentOperators] = useState({})
@@ -66,11 +69,20 @@ function Dashboard() {
     axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/inputs/get_inputs/', formdata).then((response) => {
       if(response.data.status == 'success'){
         setInputs(response.data.data);
-        console.log(inputs)
         setMenu("true")
       }
     })
 
+  }
+
+  const getGraphInputs = () => {
+    const formdata = new FormData();
+    formdata.append('id', localStorage.getItem('user_id'))
+    axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/inputs/get_inputs/', formdata).then((response) => {
+      if(response.data.status == 'success'){
+        setGraphParams(response.data.data);
+      }
+    })
   }
 
   const showInputsDipdendenti = () => {
@@ -79,7 +91,6 @@ function Dashboard() {
     axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/inputs/get_operators_inputs/', formdata).then((response) => {
       if(response.data.status == 'success'){
         setInputsDipendenti(response.data.data);
-        console.log(inputs)
         setDipendenti("true")
       }
     })
@@ -143,7 +154,8 @@ function Dashboard() {
   const getTotalEarnings = () => {
     const formdata = new FormData();
     formdata.append('id', localStorage.getItem('user_id'))
-    axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/auth/total_earnings/', formdata).then((response) => {
+    formdata.append('param', selectedParamGraph)
+    axios.post('http://localhost:8000/auth/total_earnings/', formdata).then((response) => {
       if(response.data.status == 'success'){
         setTotalIncome(response.data.total)
       }
@@ -151,41 +163,55 @@ function Dashboard() {
   }
 
   const getWeeklyEarnings = () => {
+    setLoadingActive(true)
     const formdata = new FormData();
     formdata.append('id', localStorage.getItem('user_id'));
-    axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/auth/week_graph_earnings/', formdata).then((response) => {
+    formdata.append('param', selectedParamGraph)
+    axios.post('http://localhost:8000/auth/week_graph_earnings/', formdata).then((response) => {
       if(response.data.status == "success"){
         setWeeklyGraph(response.data.data)
-        console.log(response.data.data)
       }
-  
     })
+    setLoadingActive(false)
   }
 
   const getMonthlyGraph = () => {
     const formdata = new FormData();
+    formdata.append('param', selectedParamGraph)
     formdata.append('id', localStorage.getItem('user_id'));
-    axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/auth/monthly_graph_earnings/', formdata).then((response) => {
+    axios.post('http://localhost:8000/auth/monthly_graph_earnings/', formdata).then((response) => {
       if(response.data.status == "success"){
         setMonthlyGraph(response.data.data)
-        console.log(response.data.data)
       }
     })
   }
 
   useEffect(() => {
+    getWeeklyEarnings();
+    getMonthlyGraph();
+    getTotalEarnings();
+  }, [selectedParamGraph])
+  
+
+  useEffect(() => {
     if(!isRequestMade){
+      setLoadingActive(true)
+      getGraphInputs();
       getTotalEarnings();
       getEarnings();
       getOperators();
       getWeeklyEarnings();
       getMonthlyGraph();
       setIsRequestMade(true);
+      setLoadingActive(false)
     }
   })
 
   return (
     <div className='dashboard-container'>
+      <div className='db-c'>
+        <DashboardNavbar/>
+      </div>
       {isLoading === true && (
         <div className='overlay'>
             <div className='spinner'>
@@ -195,10 +221,6 @@ function Dashboard() {
             </div>
         </div>
       )}
-      <div className='db-c'>
-        <DashboardNavbar/>
-      </div>
-      
       <div className='content-section'>
         <div className='left-navigation-bar-container'>
           <div className='all-left-navigation'>
@@ -218,43 +240,58 @@ function Dashboard() {
         </div>
 
         <div className={choose==="generale" ? 'contenuto-generale-container' : 'contenuto-generale-container hidden'}>
-          <div className='total-income-container'><h3>Incassi totali: </h3><p>€{totalIncome}</p></div>
-          <div className='graph-income-section-container'>
-          <div className='left-graph-container'>
-                          <div className='graph-title-container'>
-                            <p className='graph-title'>Andamento annuale</p>
-                          </div>
-                          <div className='graph-component-container'>
-                          <ResponsiveContainer  width="90%" aspect={4.0/3.0}>
-                          <LineChart data={monthlyGraph} >
-                            <XAxis dataKey="Mese" />
-                            <YAxis/>
-                            <Tooltip />
-                            <Legend />
-                            <Line type="monotone" dataKey="euro" stroke="#4075FF" />
-                          </LineChart>
-                          </ResponsiveContainer>
-                          </div>
+          <div className='total-income-container'>
+            <select onChange={(e) => setSelectedParamGraph(e.target.value)} className='content-params-t-dashboard'>
+                <option value="undefined">Tipo...</option>
+                { 
+                  graphParams.params != null && graphParams.params != undefined ?
+                    Object.entries(graphParams?.params)?.map(([key, value]) => {
+                        return(
+                          <option className='add-form-input' value={key}>{key}</option>
+                        )
+                    })
+                  : <div/>
+                }
+            </select>
+            <h3>Incassi totali: </h3>
+            <p>€{totalIncome}</p>
           </div>
-          <div className='right-graph-container'>
-                      <div className='graph-generale-container' onClick={() => setChoose('incassi')}>
-                          <div className='graph-title-container'>
-                            <p className='graph-title'>Non male per questa settimana!</p>
-                          </div>
-                          <div className='graph-component-container'>
-                            <ResponsiveContainer width="90%" aspect={4.0/3.0}>
-                              <BarChart data={weeklyGraph}>
-                                <XAxis dataKey="Giorno" />
-                                <YAxis />
-                                <Tooltip />
-                                <Legend />
-                                <Bar dataKey="euro" fill="#4075FF"/>
-                              </BarChart>
-                            </ResponsiveContainer>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
+          <div className='graph-income-section-container'>
+            <div className='left-graph-container'>
+              <div className='graph-title-container'>
+                <p className='graph-title'>Andamento annuale</p>
+              </div>
+              <div className='graph-component-container'>
+                <ResponsiveContainer  width="90%" aspect={4.0/3.0}>
+                  <LineChart data={monthlyGraph} >
+                    <XAxis dataKey="Mese" />
+                    <YAxis/>
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="euro" stroke="#4075FF" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+            <div className='right-graph-container'>
+              <div className='graph-generale-container' onClick={() => setChoose('incassi')}>
+                <div className='graph-title-container'>
+                  <p className='graph-title'>Non male per questa settimana!</p>
+                </div>
+                <div className='graph-component-container'>
+                  <ResponsiveContainer width="90%" aspect={4.0/3.0}>
+                    <BarChart data={weeklyGraph}>
+                      <XAxis dataKey="Giorno" />
+                      <YAxis />
+                      <Tooltip />
+                      <Legend />
+                      <Bar dataKey="euro" fill="#4075FF"/>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className={choose==="incassi" ? 'contenuto-incassi-container' : 'contenuto-incassi-container hidden'}>
@@ -290,7 +327,7 @@ function Dashboard() {
                             )
                           }
                         })
-                      : console.log("waiting for data...")
+                      : <div/>
                     }
                     <div className='divisor-button'>
                       <div className='add-button' onClick={uploadEarning}>
@@ -338,7 +375,7 @@ function Dashboard() {
                             )
                           }
                         })
-                      : console.log("waiting for data...")
+                      : <div/>
                     }
                     <div className='divisor-button'>
                       <div className='add-button' onClick={uploadNewOperator}>

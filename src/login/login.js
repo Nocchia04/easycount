@@ -4,12 +4,15 @@ import './login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ColorRing } from 'react-loader-spinner';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
   const [isLoading, setLoadingActive] = useState(false)
+  const [usernamePasswordError, setUsernamePasswordError] = useState('correct')
 
   const navigate = useNavigate()
 
@@ -29,11 +32,20 @@ function Login() {
         localStorage.setItem('username', response.data.username)
         localStorage.setItem('profile_image', response.data.profile_image)
         navigate('/dashboard')
-        setLoadingActive(false);
         window.location.reload();
+        setLoadingActive(false);
+      }else{
+        setLoadingActive(false);
+        setUsernamePasswordError("error")
       } 
     })
   }
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <div>
@@ -51,8 +63,18 @@ function Login() {
         <div className='login-background-image-container'>
             <div className='login-form'>
                 <p>Accedi</p>
-                <input className='login-form-input' placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>
-                <input className='login-form-input' placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
+                {
+                  usernamePasswordError == "error" ? <div className='credentials-error-container'><h6 className='credentials-error-message'>Ops! Qualcosa è andato storto, ricontrolla username e password!</h6></div> : <div/>
+                }
+                <div className='login-form-container'>
+                  <input className='login-form-input' placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>
+                </div>
+                <div className='login-form-container'>
+                    <input className='login-form-input-pass' type={showPassword ? 'text' : 'password'} placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
+                    <div className='eye-container'>
+                      <FontAwesomeIcon className='eye' icon={showPassword ? faEye : faEyeSlash} onClick={togglePasswordVisibility}/>
+                    </div>
+                </div>
                 <button onClick={hadleLogin}>Accedi</button>
             </div>
         </div>

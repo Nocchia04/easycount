@@ -17,6 +17,7 @@ const Settings = () =>  {
   const [fieldComposite, setFieldComposite] = useState('')
   const id = localStorage.getItem('user_id')
   const [isLoading, setLoadingActive] = useState(false)
+  const [errorInFielads, setErrorInFields] = useState("correct")
 
 
   const sendNewParameter = () => {
@@ -28,10 +29,17 @@ const Settings = () =>  {
       'composite_settings' : composite,
     }
 
+    if(fieldName == '' || fieldType == ''){
+      setErrorInFields("error")
+      setLoadingActive(false)
+      return;
+    }
+
     document['new_settings'][fieldName] = fieldType
     document['composite_settings'][fieldName] = fieldComposite
 
     axios.post('https://easycount-8a1d6b5ada49.herokuapp.com/inputs/edit_inputs/', document).then((response) => {
+
       if(response.data.status == 'success'){
         const formdata = new FormData()
         formdata.append('id', id)
@@ -42,6 +50,7 @@ const Settings = () =>  {
           }
         })
       }
+      setErrorInFields("correct")
       setLoadingActive(false)
     })
 
@@ -205,6 +214,9 @@ const Settings = () =>  {
         </div>
         <div className='my-settings-display'>
           <div className='my-settings-container'>
+            {
+              errorInFielads == "error" ? <div className='error-in-fields-container'><h4 className='error-in-fields-text'>Errore nei campi, controlla che siano tutti inseriti correttamente</h4></div> : <div/>
+            }
             {
               Object.entries(params).map(([key, value]) => {
                 if(value != "composite"){
