@@ -1,0 +1,48 @@
+.dashboard-mobile-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.dashboard-mobile-container.hidden{
+    display: none;
+}
+
+.mobile-graph-section-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.incassi-mobile-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.incassi-mobile-container.hidden{
+    display: none;
+}
+
+.dipendenti-mobile-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.dipendenti-mobile-container.hidden{
+    display: none;
+}
