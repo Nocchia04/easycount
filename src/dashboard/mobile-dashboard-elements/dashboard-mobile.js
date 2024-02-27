@@ -205,7 +205,7 @@ const DashboardMobile = ({ chooseMobile }) => {
     })
 
   return (
-    <div>
+    <div className='main-dashboard-container'>
         <div className={chooseMobile == "generale" ? "dashboard-mobile-container" : "dashboard-mobile-container hidden"}>
             <div className='total-income-container-mobile'>
                 <select onChange={(e) => setSelectedParamGraph(e.target.value)} className='content-params-t-dashboard'>

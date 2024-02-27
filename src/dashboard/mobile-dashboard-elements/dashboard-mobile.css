@@ -4,7 +4,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 .dashboard-mobile-container.hidden{
@@ -45,4 +44,9 @@
 
 .dipendenti-mobile-container.hidden{
     display: none;
+}
+
+.main-dashboard-container{
+    overflow-y: scroll;
+    padding-bottom: 5rem;
 }
