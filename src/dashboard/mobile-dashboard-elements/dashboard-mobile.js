@@ -265,12 +265,12 @@ const DashboardMobile = ({ chooseMobile }) => {
 
 
         <div className={chooseMobile == "incassi" ? "incassi-mobile-container" : "incassi-mobile-container hidden"}>
-        <div className='incassi-navbar-container'>
-            <div className='aggiungi-button-container' onClick={showInputs}>
-              <p className='aggiungi-title'>Aggiungi Incasso</p>
-              <FontAwesomeIcon icon={faPlus} className='plus'/>
+            <div className='incassi-navbar-container'>
+                <div className='aggiungi-button-container' onClick={showInputs}>
+                <p className='aggiungi-title'>Aggiungi Incasso</p>
+                <FontAwesomeIcon icon={faPlus} className='plus'/>
+                </div>
             </div>
-          </div>
           
           <div className={incassi==="visualizza" ? 'visualizza-container view' : 'visualizza-container'}>
             <div className='table-visualizza' style={{opacity: menu === 'true' ? '0.5' : '1'}}>

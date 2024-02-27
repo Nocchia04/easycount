@@ -7,6 +7,7 @@ import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const NavbarMobile = ({ setChooseMobile }) =>  {
     const [clickedMenu, setClickedMenu] = useState(false)
+    const [isLoading, setLoadingActive] = useState(false)
     const navigate = useNavigate();
 
     const handleMenuClick = () => {
@@ -21,6 +22,15 @@ const NavbarMobile = ({ setChooseMobile }) =>  {
     const handleMenuSelect = (value) => {
         setChooseMobile(value)
         setClickedMenu(false)
+    }
+
+    const logout = () => {
+        setLoadingActive(true);
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        window.location.reload()
+        console.log('user is logged out');
+    
     }
     
 
@@ -53,8 +63,11 @@ const NavbarMobile = ({ setChooseMobile }) =>  {
                 <div className='menu-section-container' >
                     <p onClick={() => handleMenuSelect("dipendenti")}>Dipdendenti</p>
                 </div>
+                <div className='menu-section-container'>
+                    <p onClick={() => navigate('/settings')}>Impostazioni</p>
+                </div>
                 <div className='logout-menu-container'>
-                    <p>Logout</p>
+                    <p  onClick={logout}>Logout</p>
                 </div>
             </div>
         </div>
