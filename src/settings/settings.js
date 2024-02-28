@@ -106,7 +106,7 @@ function Settings() {
           <p className='sett-option-text'>Impostazioni Incassi</p>
         </Link>
         <Link to={'dipendenti'} className='sett-option-container'>
-          <p className='sett-option-text'>Impostazioni Dipendenti</p>
+          <p className='sett-option-text'>Impostazioni<br></br> Dipendenti</p>
         </Link>
       </div>
     </div>

@@ -30,7 +30,11 @@
 
 .bars-icon{
     height: 2rem;
+    color: gray;
+}
 
+.bars-icon:hover{
+    cursor: pointer;
 }
 
 .navbar-mobile-main-container{
@@ -71,20 +75,33 @@ right: 0;
 .menu-section-container{
     display: flex;
     align-items: center;
+    justify-content: center;
+    border: 1px solid #c6c6c6;
+    border-bottom: none;
+    transition: 0.2s ease;
 }
 
-.menu-section-container p{
-    margin-left: 1rem;
-    font-size: 1rem;
-    
+.menu-section-container:hover {
+    cursor: pointer;
+    background-color: #6BA4FF;
+    transition: 0.2s ease;
+    color: white;
+}
+
+.menu-section-container.selected{
+    background-color: #6BA4FF;
+    color: white;
 }
 
 .logout-menu-container{
-    background-color: #4075FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF0000;
+    color: white;
 }
 
-.logout-menu-container p{
-    color: white;
-    margin-left: 1rem;
+.logout-menu-container:hover {
+    cursor: pointer;
 }
 

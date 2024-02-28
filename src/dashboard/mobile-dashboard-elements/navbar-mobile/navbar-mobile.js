@@ -8,6 +8,7 @@ import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 const NavbarMobile = ({ setChooseMobile }) =>  {
     const [clickedMenu, setClickedMenu] = useState(false)
     const [isLoading, setLoadingActive] = useState(false)
+    const [menuClicked, setMenuClicked] = useState('generale')
     const navigate = useNavigate();
 
     const handleMenuClick = () => {
@@ -20,6 +21,7 @@ const NavbarMobile = ({ setChooseMobile }) =>  {
     }
 
     const handleMenuSelect = (value) => {
+        setMenuClicked(value)
         setChooseMobile(value)
         setClickedMenu(false)
     }
@@ -46,7 +48,7 @@ const NavbarMobile = ({ setChooseMobile }) =>  {
         </div>
         <div  className={`menu ${clickedMenu ? 'open' : ''}`}>
             <div className='menu-container'>
-                <div className='user-info-mobile-container'>
+                <div className='user-info-mobile-container' onClick={() => navigate('/settings')}>
                     <div className='user-info-data-container'>
                         <div className='profile-image-container'><img src={`data:image/png;base64,${localStorage.getItem('profile_image')}`} className='profile-image'/></div>
                     </div>
@@ -54,20 +56,20 @@ const NavbarMobile = ({ setChooseMobile }) =>  {
                         <p>{localStorage.getItem('username')}</p>
                     </div>
                 </div>
-                <div className='menu-section-container' >
-                    <p onClick={() =>handleMenuSelect("generale")}>Dashboard</p>
+                <div className={menuClicked==='generale' ? 'menu-section-container selected' : 'menu-section-container'} onClick={() =>handleMenuSelect("generale")} >
+                    <p>Dashboard</p>
                 </div>
-                <div className='menu-section-container' >
-                    <p  onClick={() => handleMenuSelect("incassi")}>Incassi</p>
+                <div className={menuClicked==='incassi' ? 'menu-section-container selected' : 'menu-section-container'} onClick={() => handleMenuSelect("incassi")}>
+                    <p>Incassi</p>
                 </div>
-                <div className='menu-section-container' >
-                    <p onClick={() => handleMenuSelect("dipendenti")}>Dipdendenti</p>
+                <div className={menuClicked==='dipendenti' ? 'menu-section-container selected' : 'menu-section-container'} onClick={() => handleMenuSelect("dipendenti")}>
+                    <p>Dipdendenti</p>
                 </div>
-                <div className='menu-section-container'>
-                    <p onClick={() => navigate('/settings')}>Impostazioni</p>
+                <div className='menu-section-container'onClick={() => navigate('/settings')}>
+                    <p>Impostazioni</p>
                 </div>
-                <div className='logout-menu-container'>
-                    <p  onClick={logout}>Logout</p>
+                <div className='logout-menu-container' onClick={logout}>
+                    <p>Logout</p>
                 </div>
             </div>
         </div>
