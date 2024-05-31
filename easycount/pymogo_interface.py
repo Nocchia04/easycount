@@ -22,7 +22,7 @@ def connect_to_db(db):
 
 
 def get_db_handle(db_name, host, port, username, password):
-    uri = "mongodb+srv://hidev23group:cAQi0GhgXAcHdZIR@hidev.a25livf.mongodb.net/?retryWrites=true&w=majority&appName=HiDev"
+    uri = "mongo_uri"
     client = MongoClient(uri)
     db_handle = client[db_name]
     return db_handle, client
